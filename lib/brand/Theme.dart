@@ -4,8 +4,14 @@ import 'package:puntada/brand/Colors.dart';
 extension BrandTheme on ThemeData {
   static ThemeData get appTheme => ThemeData(
       textTheme: const TextTheme(
-          headline1: TextStyle(
-              color: Colors.black, fontSize: 44, fontFamily: "Inter-Light")),
+          headline1:
+              TextStyle(color: Colors.black, fontSize: 38, fontFamily: "Inter"),
+          headline6: TextStyle(color: Colors.black, fontSize: 16),
+          headline2: TextStyle(
+              color: Colors.black,
+              fontSize: 26,
+              fontFamily: "Inter",
+              fontWeight: FontWeight.bold)),
       fontFamily: "Inter",
       appBarTheme: AppBarTheme(
           backgroundColor: BrandColors.backgroundColor,
