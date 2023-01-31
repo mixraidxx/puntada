@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:puntada/brand/Colors.dart';
-import 'package:puntada/brand/CommonView.dart';
 import 'package:puntada/views/home/HomeView.dart';
+import 'package:puntada/views/profile/profileView.dart';
 
 class TabView extends StatefulWidget {
+  static String routeName = "/tabView";
   const TabView({super.key});
 
   @override
@@ -13,25 +12,41 @@ class TabView extends StatefulWidget {
 }
 
 class _TabViewState extends State<TabView> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    const HomeView(),
+    const ProfileView(),
+    const Text("dsd"),
+    const Text("fsdfsd")
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: BrandColors.secondaryColor,
             unselectedItemColor: BrandColors.terciaryColor,
+            currentIndex: _currentIndex,
+            //onTap: onTabTapped,
             showSelectedLabels: false,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,
             backgroundColor: BrandColors.primaryColor,
             items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: "cd"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.credit_card), label: "cd"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.lock_clock), label: "cd"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.media_bluetooth_on_sharp), label: "cd")
+              BottomNavigationBarItem(icon: Icon(Icons.credit_card), label: ""),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+              BottomNavigationBarItem(icon: Icon(Icons.schedule), label: ""),
+              BottomNavigationBarItem(icon: Icon(Icons.location_on), label: "")
             ]),
-        body: HomeView());
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _children,
+        ));
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }

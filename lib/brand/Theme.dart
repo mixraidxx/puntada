@@ -11,7 +11,12 @@ extension BrandTheme on ThemeData {
               color: Colors.black,
               fontSize: 26,
               fontFamily: "Inter",
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.bold),
+          headline3: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontFamily: "Inter",
+              fontWeight: FontWeight.normal)),
       fontFamily: "Inter",
       appBarTheme: AppBarTheme(
           backgroundColor: BrandColors.backgroundColor,
