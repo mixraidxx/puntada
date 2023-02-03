@@ -2,9 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:puntada/brand/Colors.dart';
 import 'package:puntada/brand/CommonView.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:puntada/services/User.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  var nombre = "";
+
+  @override
+  void initState() {
+    nombre = User().getNombreCompleto()!;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +49,7 @@ class ProfileView extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                      "Nombre del usuario",
+                      nombre,
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     const Chip(

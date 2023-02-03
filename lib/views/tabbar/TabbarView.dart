@@ -16,8 +16,8 @@ class _TabViewState extends State<TabView> {
   final List<Widget> _children = [
     const HomeView(),
     const ProfileView(),
-    const Text("dsd"),
-    const Text("fsdfsd")
+    const Text("En construcción"),
+    const Text("En construcción")
   ];
 
   @override
@@ -27,7 +27,7 @@ class _TabViewState extends State<TabView> {
             selectedItemColor: BrandColors.secondaryColor,
             unselectedItemColor: BrandColors.terciaryColor,
             currentIndex: _currentIndex,
-            //onTap: onTabTapped,
+            onTap: onTabTapped,
             showSelectedLabels: false,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,

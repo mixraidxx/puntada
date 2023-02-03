@@ -74,10 +74,9 @@ class _HomeViewState extends State<HomeView> {
                                 )
                               ]),
                         )),
-                    SvgPicture.asset(
-                      'assets/background_card.svg',
-                      height: 200,
-                    ),
+                    SvgPicture.asset('assets/background_card.svg',
+                        height: 200,
+                        color: const Color.fromARGB(102, 28, 90, 171)),
                     const Positioned.fill(
                       child: Align(
                           alignment: Alignment.bottomCenter,
@@ -216,7 +215,7 @@ class childWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Paga con: ",
+                              "Descuento con: ",
                               style: Theme.of(context).textTheme.headline6,
                             ),
                             Text(

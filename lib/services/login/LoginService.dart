@@ -13,11 +13,10 @@ class LoginService {
       final response =
           await _api.sendGet("Account/loginCliente/$email/$password");
       if (response.statusCode == 200) {
-        print(response.body);
         final loginResponse =
             LoginResponse.fromJson(json.decode(response.body));
         User().setToken(loginResponse.token);
-        print(loginResponse.token);
+        User().setNombre(loginResponse.nombreCompleto);
         return true;
       }
       return false;
