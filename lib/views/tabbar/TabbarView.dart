@@ -45,6 +45,10 @@ class _TabViewState extends State<TabView> {
   }
 
   void onTabTapped(int index) {
+    print("index: $index");
+    if (index == 2 || index == 3) {
+      return;
+    }
     setState(() {
       _currentIndex = index;
     });

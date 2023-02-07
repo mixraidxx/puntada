@@ -21,3 +21,16 @@ class HomeSuccess extends HomeState {
 class HomeFailure extends HomeState {
   const HomeFailure();
 }
+
+class ClientdataLoading extends HomeState {
+  const ClientdataLoading();
+}
+
+class ClientdataSuccess extends HomeState {
+  final ClientDataResponse data;
+  const ClientdataSuccess(this.data);
+}
+
+class ClientdataFailure extends HomeState {
+  const ClientdataFailure();
+}

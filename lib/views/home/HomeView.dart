@@ -7,6 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:puntada/brand/CommonView.dart';
 import 'package:puntada/cubit/home/home_cubit.dart';
 
+import '../../services/User.dart';
+
 class HomeView extends StatefulWidget {
   static String routeName = "/home";
   const HomeView({super.key});
@@ -19,6 +21,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     context.read<HomeCubit>().getQr();
+    var nombre = User().getNombreCompleto()!;
     super.initState();
   }
 
@@ -101,10 +104,20 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
-class childWidget extends StatelessWidget {
+class childWidget extends StatefulWidget {
   const childWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<childWidget> createState() => _childWidgetState();
+}
+
+class _childWidgetState extends State<childWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,14 +202,31 @@ class childWidget extends StatelessWidget {
                                 child: Center(
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text(
+                                        User().getNombreCompleto()!,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
+                                      ),
                                       const Text(
-                                        "Código QR",
+                                        "Descuento: 0.15 \$/litro",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 35),
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const Text(
+                                        "494",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
                                       ),
                                       Image.memory(_bytesImage!)
                                     ],
