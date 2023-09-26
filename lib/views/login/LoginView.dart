@@ -18,6 +18,7 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _passwordVisible = false;
+  final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -52,10 +53,22 @@ class _LoginViewState extends State<LoginView> {
                       width: 250, semanticsLabel: 'Acme Logo'),
                   Expanded(
                       child: Center(
-                    child: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty ||
+                                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                      .hasMatch(value)) {
+                                return "Ingresa una dirección de correo valida";
+                              } else {
+                                return null;
+                              }
+                            },
+                            enabled: state is! LoginLoading,
                             controller: _emailcontroller,
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
@@ -68,6 +81,13 @@ class _LoginViewState extends State<LoginView> {
                             height: 32,
                           ),
                           TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Ingresa una contraseña";
+                              } else {
+                                return null;
+                              }
+                            },
                             controller: _passwordController,
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: !_passwordVisible,
@@ -85,30 +105,25 @@ class _LoginViewState extends State<LoginView> {
                                       : Icons.visibility_off_outlined)),
                               border: const UnderlineInputBorder(),
                               labelText: 'Contraseña',
+                              enabled: state is! LoginLoading,
                             ),
                           ),
                           const SizedBox(
                             height: 32,
                           ),
-                          ElevatedButton(
-                              onPressed: () {
-                                final email = _emailcontroller.text.trim();
-                                final password =
-                                    _passwordController.text.trim();
-                                if (email.isEmpty || password.isEmpty) {
-                                  Dialogs.showTopMessage(
-                                      context,
-                                      "Todos los campos son requeridos",
-                                      TopMessageType.Error);
-                                  return;
-                                }
-                                context
-                                    .read<LoginCubit>()
-                                    .login(email, password);
-                              },
-                              child: const SizedBox(
-                                  width: double.infinity,
-                                  child: Center(child: Text("Entrar"))))
+                          (state is LoginLoading)
+                              ? const CircularProgressIndicator()
+                              : ElevatedButton(
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      context.read<LoginCubit>().login(
+                                          _emailcontroller.text,
+                                          _passwordController.text);
+                                    }
+                                  },
+                                  child: const SizedBox(
+                                      width: double.infinity,
+                                      child: Center(child: Text("Entrar"))))
                         ],
                       ),
                     ),

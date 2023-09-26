@@ -28,6 +28,13 @@ class _ProfileViewState extends State<ProfileView> {
     return Scaffold(
         appBar: AppBar(
           leading: const Icon(Icons.dashboard),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, "/login");
+                },
+                icon: const Icon(Icons.exit_to_app))
+          ],
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {

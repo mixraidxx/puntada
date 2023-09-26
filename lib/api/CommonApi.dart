@@ -29,14 +29,10 @@ class CommonAPI {
                 body: body)
             .timeout(_timeoutDuration,
                 onTimeout: () => Response("Error timeout", 500));
-        //Loggers.showDebug(response.body);
-        print(response);
         return response;
       } else {
         final response = await http.post(url,
             headers: {'Content-Type': 'application/json'}, body: body);
-        //Loggers.showDebug(response.body);
-        print(response);
         return response;
       }
     } catch (e) {
@@ -58,14 +54,10 @@ class CommonAPI {
           },
         ).timeout(_timeoutDuration,
             onTimeout: () => Response("Error timeout", 500));
-        //Loggers.showDebug(response.body);
-        print(response);
         return response;
       } else {
         final response =
             await http.get(url, headers: {'Content-Type': 'application/json'});
-        //Loggers.showDebug(response.body);
-        print(response);
         return response;
       }
     } catch (e) {
